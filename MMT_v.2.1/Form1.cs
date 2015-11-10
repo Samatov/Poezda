@@ -7,32 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MMT_v._2._1
 {
     public partial class Form1 : Form
-    {
+    {string[] time_Stops;int[] coordinates;
+          int timeBegginHour, timeBegginMin, timeEndHour, timeEndMin;
+        string[] arr;
         int hourInt; int i = 0, j, count = 0;
         int minInt;
         int secInt;
         int X, Y;
         string hour, min, sec, realtime;
         bool stop = true;
-        int timeBegginHour = 08, timeBegginMin = 00, timeEndHour = 16, timeEndMin = 00;
+       // int timeBegginHour = 08, timeBegginMin = 00, timeEndHour = 16, timeEndMin = 00;
         ListBox list = null;
         PictureBox pictureBoxs = null;
-        string[] ArrTrain = { "427", "429" };
-        int[] coordinates = new int[] { 50, 48, 107, 48, 177, 48, 244, 48, 337,48,420,48,505,48,596,688,781,940};
+       // string[] ArrTrain = { "427", "429" };
+        //int[] coordinates = new int[] { 50, 48, 107, 48, 177, 48, 244, 48, 337,48,420,48,505,48,596,688,781,940};
         //string[] timeStops = new string[] { "08:30", "09:00", "09:30", "10:00" };
-        string[] timeStops = new string[] { "08", "00", "08", "23", "08", "50", "09", "20", "11", "45", "13", "30","14","05", "14", "15", "16", "00" };
+       // string[] time_Stops = new string[] { "08", "00", "08", "23", "08", "50", "09", "20", "11", "45", "13", "30","14","05", "14", "15", "16", "00" };
         
        
 
         public Form1()
         {
             InitializeComponent();
-            
-          
+
+            Vivod_data.Items.Add("427 express Moscow Tyla 8:00 16:00");
+            Vivod_data.Items.Add("428 express Moscow Tyla 6:00 14:00");
+            Vivod_data.Items.Add("428 express Moscow Tyla 4:00 12:00");
+                    
 
         /*   if (hourInt >= timeBegginHour)
            {
@@ -84,11 +90,11 @@ namespace MMT_v._2._1
 
 
 
-            int lenght = timeStops.Length;
+            int lenght = time_Stops.Length;
             while ((stop))
             {
-                stops1 = timeStops[i] + timeStops[i + 1];
-                stops2 = timeStops[i + 2] + timeStops[i + 3];
+                stops1 = time_Stops[i] + time_Stops[i + 1];
+                stops2 = time_Stops[i + 2] + time_Stops[i + 3];
                 stops1Int = int.Parse(stops1);
                 stops2Int = int.Parse(stops2);
                 if ((realtimeInt >= stops1Int) & (realtimeInt < stops2Int))
@@ -106,7 +112,7 @@ namespace MMT_v._2._1
 
 
             }
-            stop = false;
+            stop = true;
             X = coordinates[count];
             Y = coordinates[count + 1];
 
@@ -114,19 +120,19 @@ namespace MMT_v._2._1
 
         void draw()
         {
-            if (pictureBoxs != null)
+          /*  if (pictureBoxs != null)
             {
                 pictureBox1.Controls.Remove(pictureBoxs);
                 pictureBoxs = null;
-            }
+            }*/
             pictureBoxs = new PictureBox();
             pictureBoxs.Size = new Size(22, 22);
             
             // pictureBox1.Refresh();
-            pictureBoxs.Load("seat.jpg");
+            pictureBoxs.Load("seat1.jpg");
            
             pictureBoxs.BackColor = Color.Transparent;
-            pictureBoxs.Location = new Point(X,Y);
+            pictureBoxs.Location = new Point(X-11,Y-22);
             // i = i + 2;
             pictureBox1.Controls.Add(pictureBoxs);
         }
@@ -148,7 +154,7 @@ namespace MMT_v._2._1
 
         private void button1_Click(object sender, EventArgs e)
         {
-           //ghdbbthththth
+
            // getTime();
             proverka();
             getcoordinate();
@@ -168,6 +174,51 @@ namespace MMT_v._2._1
             textBox2.Enabled = true;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+              if (pictureBoxs != null)
+            {
+                pictureBox1.Controls.Remove(pictureBoxs);
+                pictureBoxs = null;
+            }
+            string[] Arr_Train = new string[Vivod_data.Items.Count];
+            for (int j = 0; j < Vivod_data.Items.Count; j++)
+            {
+                string stroka = Vivod_data.Items[j].ToString();
+                arr = stroka.Split(' ');
+                Arr_Train[j] = arr[0];   // Массив поездов(номера)
+            }
+            for (i = 0; i < 2; i++)
+            {
+                // Переключатель между поездами
+
+
+                // Данные для передачи в MMT
+                coordinates = Massive.Coordinates_fill(Arr_Train[i].Split('/'));
+                time_Stops = Massive.Time_stops_fill(Arr_Train[i].Split('/'));
+                timeBegginHour = int.Parse(time_Stops[0]); timeBegginMin = int.Parse(time_Stops[1]); timeEndHour = int.Parse(time_Stops[time_Stops.Length - 2]); timeEndMin = int.Parse(time_Stops[time_Stops.Length - 1]);
+
+
+                proverka();
+                getcoordinate();
+                draw();
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                Vivod_ostanovok.Visible = true;
+                for (int k = 0; k < coordinates.Length; k++)
+                {
+                    Vivod_ostanovok.Items.Add(coordinates[k]);
+                }
+                for (int k = 0; k < time_Stops.Length; k++)
+                {
+                    Vivod_ostanovok.Items.Add(time_Stops[k]);
+                }
+            }
+          //  for (int k = 0; k < time_Stops.Length; k++)
+           // listBox1.Items.Add(time_Stops[j]);
+        }
+
        
         
         
@@ -177,8 +228,85 @@ namespace MMT_v._2._1
 
        
     }
-    
- 
+
+    public class Massive
+    {
+
+        public static int[] Coordinates_fill(string[] arr_train)
+        {
+            string[] arr; int[] coordinates = new int[0];
+            StreamReader fs3 = new StreamReader("BaseStope.txt");
+            StreamReader fs1 = new StreamReader("BaseTrain.txt");
+            List<string> collection = new List<string>();
+            while (true)
+            {
+                string s = fs1.ReadLine();
+                if (s != null)
+                {
+                    if (s.IndexOf(arr_train[0]) > -1)
+                    {
+                        collection.Add(s);
+                    }
+                }
+                else
+                    break;
+            }
+            arr = collection[0].Split(' ');
+            arr[arr.Length - 1] = "null";
+            int j = 0;
+            while (true)
+            {
+                string s = fs3.ReadLine();
+                if (s != null)
+                {
+                    for (int i = 7; i < arr.Count(); i += 3)
+                        if (s.IndexOf(arr[i]) > -1)
+                        {
+                            Array.Resize(ref coordinates, coordinates.Length + 2);
+                            string[] info = s.Split(' ');
+                            coordinates[j] = int.Parse(info[2]);
+                            coordinates[j + 1] = int.Parse(info[4]);
+                            j = j + 2;
+                        }
+                }
+                else
+                    break;
+            }
+            return coordinates;
+        }
+
+        public static string[] Time_stops_fill(string[] arr_train)
+        {
+            StreamReader fs1 = new StreamReader("BaseTrain.txt");
+            List<string> collection = new List<string>();
+            string[] arr; string[] time_stops = new string[0];
+            while (true)
+            {
+                string s = fs1.ReadLine();
+                if (s != null)
+                {
+                    if (s.IndexOf(arr_train[0]) > -1)
+                    {
+                        collection.Add(s);
+                    }
+                }
+                else
+                    break;
+            }
+            arr = collection[0].Split(' ');
+            arr[arr.Length - 1] = "null";
+            int k = 0;
+            for (int j = 8; j < arr.Length; j += 3)
+            {
+                string[] time = (arr[j].Split(':'));
+                Array.Resize(ref time_stops, time_stops.Length + 2);
+                time_stops[k] = time[0].Replace("(", "");
+                time_stops[k + 1] = time[1].Replace(")", "");
+                k = k + 2;
+            }
+            return time_stops;
+        }
+    }
 
     
 }
