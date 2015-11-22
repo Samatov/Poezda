@@ -43,6 +43,7 @@
             this.Vivod_data = new System.Windows.Forms.ListBox();
             this.Vivod_ostanovok = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,18 +126,18 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(423, 10);
+            this.button2.Location = new System.Drawing.Point(478, 10);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
-            this.button2.Text = "button2";
+            this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Vivod_data
             // 
             this.Vivod_data.FormattingEnabled = true;
-            this.Vivod_data.Location = new System.Drawing.Point(92, 207);
+            this.Vivod_data.Location = new System.Drawing.Point(121, 332);
             this.Vivod_data.Name = "Vivod_data";
             this.Vivod_data.Size = new System.Drawing.Size(173, 160);
             this.Vivod_data.TabIndex = 9;
@@ -144,7 +145,7 @@
             // Vivod_ostanovok
             // 
             this.Vivod_ostanovok.FormattingEnabled = true;
-            this.Vivod_ostanovok.Location = new System.Drawing.Point(314, 207);
+            this.Vivod_ostanovok.Location = new System.Drawing.Point(309, 323);
             this.Vivod_ostanovok.Name = "Vivod_ostanovok";
             this.Vivod_ostanovok.Size = new System.Drawing.Size(156, 160);
             this.Vivod_ostanovok.TabIndex = 10;
@@ -152,16 +153,27 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(495, 207);
+            this.listBox1.Location = new System.Drawing.Point(478, 319);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(204, 173);
             this.listBox1.TabIndex = 11;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(570, 8);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Удалить";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.Vivod_ostanovok);
             this.Controls.Add(this.Vivod_data);
@@ -197,6 +209,7 @@
         private System.Windows.Forms.ListBox Vivod_data;
         private System.Windows.Forms.ListBox Vivod_ostanovok;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
 

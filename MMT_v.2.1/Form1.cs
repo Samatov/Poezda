@@ -12,19 +12,24 @@ using System.IO;
 namespace MMT_v._2._1
 {
     public partial class Form1 : Form
-    {string[] time_Stops;int[] coordinates;
+    {
+
+        int numberPoezd=0;
+        List<Train1> listOfTrains = new List<Train1>();
+        Train1 testPoezd = new Train1();
+        string[] time_Stops;int[] coordinates;
           int timeBegginHour, timeBegginMin, timeEndHour, timeEndMin;
         string[] arr;
         int hourInt; int i = 0, j, count = 0;
         int minInt;
         int secInt;
-        int X, Y;
+        int X, Y,K;
         string hour, min, sec, realtime;
-        bool stop = true;
+        bool stop = true, chek=false;
        // int timeBegginHour = 08, timeBegginMin = 00, timeEndHour = 16, timeEndMin = 00;
         ListBox list = null;
         PictureBox pictureBoxs = null;
-       // string[] ArrTrain = { "427", "429" };
+        string[] ArrTrain = { "427", "429" };
         //int[] coordinates = new int[] { 50, 48, 107, 48, 177, 48, 244, 48, 337,48,420,48,505,48,596,688,781,940};
         //string[] timeStops = new string[] { "08:30", "09:00", "09:30", "10:00" };
        // string[] time_Stops = new string[] { "08", "00", "08", "23", "08", "50", "09", "20", "11", "45", "13", "30","14","05", "14", "15", "16", "00" };
@@ -38,7 +43,10 @@ namespace MMT_v._2._1
             Vivod_data.Items.Add("427 express Moscow Tyla 8:00 16:00");
             Vivod_data.Items.Add("428 express Moscow Tyla 6:00 14:00");
             Vivod_data.Items.Add("428 express Moscow Tyla 4:00 12:00");
-                    
+            textBox1.Text = DateTime.Now.ToString("HH");
+            textBox2.Text = DateTime.Now.ToString("mm");
+            textBox1.Enabled = true;
+            textBox2.Enabled = true;
 
         /*   if (hourInt >= timeBegginHour)
            {
@@ -85,7 +93,8 @@ namespace MMT_v._2._1
             count = 0;
             string stops1, stops2;
             int stops1Int, stops2Int;
-            string realtime = hour + min;
+            //string realtime = hour + min;
+            string realtime = textBox1.Text + textBox2.Text;
             int realtimeInt = int.Parse(realtime);
 
 
@@ -120,12 +129,54 @@ namespace MMT_v._2._1
 
         void draw()
         {
-          /*  if (pictureBoxs != null)
+          
+           
+
+            Train1 poezd = new Train1();
+           
+            
+            poezd.Click += new System.EventHandler(poezd_Click);
+            poezd.x = X;
+            poezd.y = Y;
+
+            if (K != 0) { 
+            for (int i = 0; i < listOfTrains.Count; i++)
             {
-                pictureBox1.Controls.Remove(pictureBoxs);
-                pictureBoxs = null;
-            }*/
-            pictureBoxs = new PictureBox();
+              testPoezd = listOfTrains[i];
+              if ((testPoezd.x == poezd.x) & (testPoezd.y == poezd.y))
+              {
+                 // testPoezd.number.Add(ArrTrain[numberPoezd]);
+                 // listOfTrains.Add(poezd);
+
+                  testPoezd.Location = new Point(X - 11, Y - 22);
+                  testPoezd.Size = new Size(21, 21);
+                  testPoezd.number.Add(ArrTrain[numberPoezd]);
+                //  poezd.number.Add("s");
+              }
+                   // listOfTrains.RemoveAt(listOfTrains.Count - 1);
+
+                
+
+            }
+           // poezd = testPoezd;
+        }
+            K++;
+            
+            listOfTrains.Add(poezd);
+            poezd.Location = new Point(X - 11, Y - 22);
+            poezd.Size = new Size(21, 21);
+            poezd.number.Add(ArrTrain[numberPoezd]);
+          //  poezd.number.Add("s");
+
+            poezd.Visible = true;
+
+
+            pictureBox1.Controls.Add(poezd);
+            numberPoezd++;
+
+
+
+          /*  pictureBoxs = new PictureBox();
             pictureBoxs.Size = new Size(22, 22);
             
             // pictureBox1.Refresh();
@@ -134,17 +185,33 @@ namespace MMT_v._2._1
             pictureBoxs.BackColor = Color.Transparent;
             pictureBoxs.Location = new Point(X-11,Y-22);
             // i = i + 2;
-            pictureBox1.Controls.Add(pictureBoxs);
+            pictureBox1.Controls.Add(pictureBoxs);*/
+           
         }
 
+        private void poezd_Click(object sender, EventArgs e)
+        {
+            Train1 poezd = (Train1)sender;
+           // UserControl1 us = (UserControl1)sender;
+            //MessageBox.Show(us.name);
+            listBox1.Items.Clear();
+            for (int i = 0; i < poezd.number.Count;i++ )
+                listBox1.Items.Add("Поезд № "+poezd.number[i]);
+            listBox1.Size = new Size(75, 75);
+            listBox1.Visible = true;
+            listBox1.Location = new Point(poezd.x,40+poezd.y);
+
+        }
+            
+       
         void getTime()
         {
             
             hour = DateTime.Now.ToString("HH");
             min = DateTime.Now.ToString("mm");
             sec = DateTime.Now.ToString("ss");
-            textBox1.Text = hour;
-            textBox2.Text = min;
+         //   textBox1.Text = hour;
+            //textBox2.Text = min;
 
            // string realtime = DateTime.Now.ToString("HH:mm");
             hourInt = int.Parse(hour);
@@ -188,7 +255,7 @@ namespace MMT_v._2._1
                 arr = stroka.Split(' ');
                 Arr_Train[j] = arr[0];   // Массив поездов(номера)
             }
-            for (i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 // Переключатель между поездами
 
@@ -217,6 +284,16 @@ namespace MMT_v._2._1
             }
           //  for (int k = 0; k < time_Stops.Length; k++)
            // listBox1.Items.Add(time_Stops[j]);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Visible = false;
+            for (int i = 0; i < ArrTrain.Length; i++)
+                pictureBox1.Controls.Remove(listOfTrains[i]);
+            numberPoezd = 0;
+            listOfTrains.Clear();
+             
         }
 
        
