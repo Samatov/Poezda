@@ -654,4 +654,15 @@
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="train11.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAR9JREFUSEvFl90NwjAMhM0YDMAk7ACtGIF1WkBiLtRR+lj8RekDxaV/CT7ppAjb
+        5zpx3CJzcXnIvqjkVNTyVDa6bgNZ85va8InuG9HJ7lzJUUVfZS3dHOJLDLFRZRnKuxyWJBwyxKpGlJsH
+        ts0SW0O0ouxvFDe5WgJbiGaUt5Gy0iFHK+c8rICk/Dpz7cDQDJZzQpLjo9tpf8sxB8NV6/GPanuGqgHT
+        xnLIyTDh6DbLmJPkFOasZcxJcpK4sYw5SU62urWMOUlOx8RuW+3WXF7XyW2AAH2C/49M4PaScHstAp8P
+        gQi6zQxIQLRjGhsuH3s9UlY+WekQnAfNYInNYYgdO9NJaAfS/kseAN9wZYbduxZMG7aNOcuQ1/WGP20i
+        b0u6Ybge5/1mAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

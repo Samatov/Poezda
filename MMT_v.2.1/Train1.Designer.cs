@@ -38,7 +38,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Name = "Train1";
-            this.Size = new System.Drawing.Size(23, 25);
+            this.Size = new System.Drawing.Size(204, 163);
             this.Load += new System.EventHandler(this.Train1_Load);
             this.ResumeLayout(false);
 
