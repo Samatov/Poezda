@@ -25,11 +25,11 @@ namespace MMT_v._2._1
         int secInt;
         int X, Y,K;
         string hour, min, sec, realtime;
-        bool stop = true, chek=false;
+        bool stop = true, chek,flag=false;
        // int timeBegginHour = 08, timeBegginMin = 00, timeEndHour = 16, timeEndMin = 00;
         ListBox list = null;
         PictureBox pictureBoxs = null;
-        string[] ArrTrain = { "427", "429" };
+        string[] ArrTrain = { "427", "428","429"};
         //int[] coordinates = new int[] { 50, 48, 107, 48, 177, 48, 244, 48, 337,48,420,48,505,48,596,688,781,940};
         //string[] timeStops = new string[] { "08:30", "09:00", "09:30", "10:00" };
        // string[] time_Stops = new string[] { "08", "00", "08", "23", "08", "50", "09", "20", "11", "45", "13", "30","14","05", "14", "15", "16", "00" };
@@ -41,7 +41,7 @@ namespace MMT_v._2._1
             InitializeComponent();
 
             Vivod_data.Items.Add("427 express Moscow Tyla 8:00 16:00");
-            Vivod_data.Items.Add("428 express Moscow Tyla 6:00 14:00");
+            Vivod_data.Items.Add("429 express Moscow Tyla 6:00 14:00");
             Vivod_data.Items.Add("428 express Moscow Tyla 4:00 12:00");
             textBox1.Text = DateTime.Now.ToString("HH");
             textBox2.Text = DateTime.Now.ToString("mm");
@@ -130,52 +130,86 @@ namespace MMT_v._2._1
         void draw()
         {
           
-           
-
             Train1 poezd = new Train1();
            
             
             poezd.Click += new System.EventHandler(poezd_Click);
+            poezd.MouseEnter += new System.EventHandler(poezd_MouseEnter);
+            poezd.MouseLeave += new System.EventHandler(poezd_Leave);
             poezd.x = X;
             poezd.y = Y;
 
-            if (K != 0) { 
-            for (int i = 0; i < listOfTrains.Count; i++)
+
+            if (K != 0)
             {
-              testPoezd = listOfTrains[i];
-              if ((testPoezd.x == poezd.x) & (testPoezd.y == poezd.y))
-              {
-                 // testPoezd.number.Add(ArrTrain[numberPoezd]);
-                 // listOfTrains.Add(poezd);
+                for (int i = 0; i < listOfTrains.Count; i++)
+                {
+                    testPoezd = listOfTrains[i];
+                    if ((testPoezd.x == poezd.x) & (testPoezd.y == poezd.y))
+                    {
+                        // testPoezd.number.Add(ArrTrain[numberPoezd]);
+                        // listOfTrains.Add(poezd);
 
-                  testPoezd.Location = new Point(X - 11, Y - 22);
-                  testPoezd.Size = new Size(21, 21);
-                  testPoezd.number.Add(ArrTrain[numberPoezd]);
+                        // testPoezd.Location = new Point(X - 11, Y - 22);
+                        // testPoezd.Size = new Size(21, 21);
+                        testPoezd.number.Add(ArrTrain[numberPoezd]);
+                        flag = true;
+                        ///numberPoezd++;
+                        //poezd.Dispose();
+                        //  K = 0;
+                        // poezd.Dispose();
+                        //  poezd.number.Add("s");
+                    }
+
+                    else
+                    {
+
+                        poezd.Location = new Point(X - 11, Y - 22);
+                        poezd.Size = new Size(21, 21);
+                        poezd.number.Add(ArrTrain[numberPoezd]);
+                        //  poezd.number.Add("s");
+
+                        poezd.Visible = true;
+
+
+                        pictureBox1.Controls.Add(poezd);
+                        //numberPoezd++;
+                        //K++;
+
+                    }
+
+                    // listOfTrains.RemoveAt(listOfTrains.Count - 1);
+
+
+
+                }
+                // poezd = testPoezd;
+            }
+            if (K == 0)
+            {
+
+                poezd.Location = new Point(X - 11, Y - 22);
+                poezd.Size = new Size(21, 21);
+                poezd.number.Add(ArrTrain[numberPoezd]);
                 //  poezd.number.Add("s");
-              }
-                   // listOfTrains.RemoveAt(listOfTrains.Count - 1);
 
+                poezd.Visible = true;
+
+
+               // pictureBox1.Controls.Add(poezd);
+                numberPoezd++;
                 
+                listOfTrains.Add(poezd);
+                K++;
+            }
+            else
+            {
 
             }
-           // poezd = testPoezd;
-        }
-            K++;
+
+          
             
-            listOfTrains.Add(poezd);
-            poezd.Location = new Point(X - 11, Y - 22);
-            poezd.Size = new Size(21, 21);
-            poezd.number.Add(ArrTrain[numberPoezd]);
-          //  poezd.number.Add("s");
-
-            poezd.Visible = true;
-
-
-            pictureBox1.Controls.Add(poezd);
-            numberPoezd++;
-
-
-
+            
           /*  pictureBoxs = new PictureBox();
             pictureBoxs.Size = new Size(22, 22);
             
@@ -186,7 +220,14 @@ namespace MMT_v._2._1
             pictureBoxs.Location = new Point(X-11,Y-22);
             // i = i + 2;
             pictureBox1.Controls.Add(pictureBoxs);*/
-           
+            //K++;
+            //numberPoezd++;
+            if(flag)
+            {
+                numberPoezd++;
+                poezd = null;
+                flag = false;
+            }
         }
 
         private void poezd_Click(object sender, EventArgs e)
@@ -194,6 +235,7 @@ namespace MMT_v._2._1
             Train1 poezd = (Train1)sender;
            // UserControl1 us = (UserControl1)sender;
             //MessageBox.Show(us.name);
+            poezd.Location = new Point(poezd.x - 30, poezd.y - 30);
             listBox1.Items.Clear();
             for (int i = 0; i < poezd.number.Count;i++ )
                 listBox1.Items.Add("Поезд № "+poezd.number[i]);
@@ -201,6 +243,24 @@ namespace MMT_v._2._1
             listBox1.Visible = true;
             listBox1.Location = new Point(poezd.x,40+poezd.y);
 
+        }
+
+        private void poezd_MouseEnter(object sender, EventArgs e)
+        {
+            Train1 poezd = (Train1)sender;
+            poezd.Size = new Size(30, 30);
+          //  poezd.Location = new Point(poezd.x - 6, poezd.y - 11);
+          //  testPoezd.Location = new Point(X - 11, Y - 22);
+        }
+
+        private void poezd_Leave(object sender, EventArgs e)
+        {
+            Train1 poezd = (Train1)sender;
+            
+            if(listBox1.Visible == false)
+                poezd.Size = new Size(21, 21);
+            
+            
         }
             
        
@@ -243,11 +303,7 @@ namespace MMT_v._2._1
 
         private void button2_Click(object sender, EventArgs e)
         {
-              if (pictureBoxs != null)
-            {
-                pictureBox1.Controls.Remove(pictureBoxs);
-                pictureBoxs = null;
-            }
+          
             string[] Arr_Train = new string[Vivod_data.Items.Count];
             for (int j = 0; j < Vivod_data.Items.Count; j++)
             {
@@ -255,7 +311,7 @@ namespace MMT_v._2._1
                 arr = stroka.Split(' ');
                 Arr_Train[j] = arr[0];   // Массив поездов(номера)
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < Arr_Train.Length; i++)
             {
                 // Переключатель между поездами
 
@@ -289,11 +345,22 @@ namespace MMT_v._2._1
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.Visible = false;
-            for (int i = 0; i < ArrTrain.Length; i++)
+            for (int i = 0; i < ArrTrain.Length; i++){
                 pictureBox1.Controls.Remove(listOfTrains[i]);
+            listOfTrains[i] = null;
+        }
             numberPoezd = 0;
             listOfTrains.Clear();
+            K = 0;
              
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //Train1 poezd = (Train1)sender;
+            listBox1.Visible = false;
+           // poezd.Size = new Size(21, 21);
+           
         }
 
        

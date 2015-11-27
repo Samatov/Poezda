@@ -1,6 +1,6 @@
-﻿namespace MMT_v._2._1
+﻿namespace Step_v0
 {
-    partial class Train1
+    partial class TrainControl
     {
         /// <summary> 
         /// Требуется переменная конструктора.
@@ -28,20 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Train1));
-            this.SuspendLayout();
-            // 
-            // Train1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Name = "Train1";
-            this.Size = new System.Drawing.Size(23, 25);
-            this.Load += new System.EventHandler(this.Train1_Load);
-            this.ResumeLayout(false);
-
         }
 
         #endregion
