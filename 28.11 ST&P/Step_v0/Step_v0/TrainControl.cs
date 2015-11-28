@@ -12,11 +12,16 @@ namespace Step_v0
 {
     public partial class TrainControl : UserControl
     {
+
        public int ctrl_x=-1, ctrl_y=-1;
-        List<Train>coll_train = new List<Train>();
+      public  List<Train>coll_train = new List<Train>();
+       
+        
         public TrainControl(int x, int y)
         {
-            Location = new Point(x, y);
+            ctrl_x = x;
+            ctrl_y = y;
+            Location = new Point(ctrl_x, ctrl_y);
          //   Size = new Size(30, 30);
             Visible = true;
             

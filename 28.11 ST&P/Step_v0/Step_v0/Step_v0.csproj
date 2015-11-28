@@ -116,7 +116,9 @@
     <None Include="Resources\Base.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ostanovki.xml" />
+    <Content Include="Ostanovki.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Passanger.xml" />
     <Content Include="Poezd.xml">
       <SubType>Designer</SubType>

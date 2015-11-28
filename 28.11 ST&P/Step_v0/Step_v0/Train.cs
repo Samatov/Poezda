@@ -12,7 +12,7 @@ namespace Step_v0
         public List<DateTime> Time;
         public List<string>Distance;
        public string last_stops;
-       bool motion;
+    public   bool motion;
 
         public Train(string n, string t, List<string> ostanovki, List<DateTime> Vreme_ostanovkok) {
             Nomer = n;
@@ -51,6 +51,10 @@ namespace Step_v0
             min = int.Parse(DateTime.Now.ToString("mm"));
            realtime = realtime.AddHours(hour);
            realtime= realtime.AddMinutes(min);
+
+            
+
+
             if (realtime <= Time[0])//поезl не выехал
             {
                 motion = false;
@@ -90,6 +94,8 @@ namespace Step_v0
                
             }
         }
+
+     
 
     }
 }

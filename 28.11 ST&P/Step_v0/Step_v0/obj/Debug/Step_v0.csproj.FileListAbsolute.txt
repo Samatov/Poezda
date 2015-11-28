@@ -57,5 +57,3 @@ C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-ma
 C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-master\Step_v0\Step_v0\obj\Debug\Step_v0.csproj.GenerateResource.Cache
 C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-master\Step_v0\Step_v0\obj\Debug\Step_v0.exe
 C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-master\Step_v0\Step_v0\obj\Debug\Step_v0.TrainControl.resources
-C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-master\Step_v0\Step_v0\bin\Debug\Step_v0.exe.CodeAnalysisLog.xml
-C:\Users\Serg\Desktop\Проект ST&P\27.11\Poezd-master\Poezd-master\train-master\Step_v0\Step_v0\bin\Debug\Step_v0.exe.lastcodeanalysissucceeded
