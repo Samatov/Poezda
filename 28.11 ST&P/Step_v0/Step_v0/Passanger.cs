@@ -4,55 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Step_v0
 {
     class Passanger
     {
-        public string Surname, Name, Secondname;
-        public static List<string> PoiskVsexPasagirov()
+        public string Surname, Name, Nomer_poezda, Nomer_Vagona, Mesto_Nomer, Mesto_Bukva;
+        public List<Bilet> Bilets= new List<Bilet>();
+        public Passanger(string n, string s, string nomer_poezda, List<Bilet> bilets)
         {
-            StreamReader fs2 = new StreamReader("basePassengers.txt");
-            List<string> collection = new List<string>();
-            while (true)
-            {
-                string s = fs2.ReadLine();
-                if (s != null)
-                {
-                    collection.Add(s);
-                }
-                else
-                    break;
-            }
-            fs2.Close();
-            return collection;
+            Name = n;
+            Surname = s;
+            Nomer_poezda = nomer_poezda;
+            Bilets = bilets;
         }
-
-        public static List<string> PoiskPasagirov(string Str)
+        public void Vivod(ref DataGridView vivod_pas, ref int i)
         {
-            StreamReader fs2 = new StreamReader("basePassengers.txt");
-            List<string> collection = new List<string>();
-            int k = 0;
-            while (true)
-            {
-                string s = fs2.ReadLine();
-                if (s != null)
-                {
-                    if (s.IndexOf(Str) > -1)
-                    {
-                        collection.Add(s);
-                        k++;
-                    }
-                }
-                else
-                    break;
-            }
-            if (k == 0)
-            {
-                collection.Add("null");
-            }
-            fs2.Close();
-            return collection;
+            vivod_pas.Rows.Add();
+            vivod_pas.Rows[i].Cells[0].Value = Surname;
+            vivod_pas.Rows[i].Cells[1].Value = Name;
+            vivod_pas.Rows[i].Cells[2].Value = Nomer_poezda;
+            vivod_pas.Visible = true;
         }
     }
   }

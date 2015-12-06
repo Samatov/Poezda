@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bilet.cs" />
+    <Compile Include="Distanation.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,11 +118,7 @@
     <None Include="Resources\Base.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ostanovki.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Passanger.xml" />
-    <Content Include="Poezd.xml">
+    <Content Include="Distanation.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

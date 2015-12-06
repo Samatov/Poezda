@@ -8,38 +8,32 @@ namespace Step_v0
 {
     public class Train
     {
-        public string Nomer, Type;
+        public string Nomer, Type,ID;
         public List<DateTime> Time;
-        public List<string>Distance;
-       public string last_stops;
-    public   bool motion;
+        public string last_stops;
+        public  bool motion;
 
-        public Train(string n, string t, List<string> ostanovki, List<DateTime> Vreme_ostanovkok) {
+        public Train(string n, string t, string id, List<DateTime> Vreme_ostanovkok) {
             Nomer = n;
             Type = t;
-            Distance = ostanovki;
+            ID = id;
             Time = Vreme_ostanovkok;
         }
 
 
-        public void Vivod(ref ListBox vivod, ref TextBox t4, ref TextBox t3, ref TextBox nomer) {
-            string str = nomer.Text;
-            List<string> collection = new List<string>();
-            bool flag = true;
-            if (str == "")
-            {
-                flag = false;
-                vivod.Items.Add(last_stops+' '+ Nomer + ' ' + Type + ' ' +Distance[0] +' '+Distance[Distance.Count-1] + ' '
-                    + Time[0].ToString("HH:mm") + ' ' + Time[Time.Count - 1].ToString("HH:mm"));
-                if (flag == true)
-                {
-                   
-                }
-                vivod.Visible = true;
-            }
+        public void Vivod(ref TextBox t4, ref TextBox t3,ref DataGridView grid_vivod,ref int i,ref string start,ref string stop) {
+            grid_vivod.Rows.Add();
+            grid_vivod.Rows[i].Cells[0].Value =last_stops;
+            grid_vivod.Rows[i].Cells[1].Value = Nomer;
+            grid_vivod.Rows[i].Cells[2].Value = Type;
+            grid_vivod.Rows[i].Cells[3].Value = start;
+            grid_vivod.Rows[i].Cells[4].Value = stop;
+            grid_vivod.Rows[i].Cells[5].Value = Time[0].ToString("HH:mm");
+            grid_vivod.Rows[i].Cells[6].Value = Time[Time.Count - 1].ToString("HH:mm");
+            grid_vivod.Visible = true;       
         }
 
-        public void last_ostanovka()
+        public void last_ostanovka(Distanation marshrut)
         {
             int count=0,i = 0;
             int hour, min;
@@ -52,21 +46,18 @@ namespace Step_v0
            realtime = realtime.AddHours(hour);
            realtime= realtime.AddMinutes(min);
 
-            
-
-
             if (realtime <= Time[0])//поезl не выехал
             {
                 motion = false;
-                last_stops = Distance[0];
+                last_stops = marshrut.Start;
                 flag = false;
                 count=0;
             }
             if (realtime >= Time[Time.Count - 1])//поезд приехал
             {
-                last_stops = Distance[Distance.Count - 1];
+                last_stops = marshrut.End;
                 flag = false;
-                count=Distance.Count-1;
+                count=marshrut.Ostanovki.Count-1;
                 motion = false;
             }
 
@@ -88,14 +79,12 @@ namespace Step_v0
                     else
                         motion = true;
 
-                    last_stops = Distance[count];
+                    last_stops = marshrut.Ostanovki[count].Name;
                     flag = false;
                 }
                
             }
-        }
-
-     
+        }   
 
     }
 }
